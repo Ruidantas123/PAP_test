@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Http\Controllers\Profile\AvatarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +17,14 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    //return view('welcome');
+    return view('welcome');
 
     //show all users
     //$users = DB::select("select * from users");
     //$users = DB::table('users')->where('id',1)->first();
     //$user = User::where('id',1)->first();
-    $users = User::all();
+     //$users = User::all();
+     //$user = User::all();
 
     //get the first user
     // $users = DB::table('users')->first();
@@ -30,39 +32,39 @@ Route::get('/', function () {
     //find the user by id
     // $users = DB::table('users')->find(1);
 
-    $user = User::all();
+   
 
     //insert users
     // $user = DB::table('users')->insert([
 
     //     'name'      =>'asdasdasda',
     //     'email'     =>'dantas@gmail.com',
-    //     'password'  =>'asdasdasd',
+    //     'password'  =>'password',
     // ]);
 
     //create users
-    //$user = User::create([
+    // $user = User::create([
 
-    //     'name'      =>'asdasdasda',
+    //     'name'      =>'ruidantas2',
     //     'email'     =>'dantas4@gmail.com',
-    //     'password'  =>bcrypt('password'),
-    //]);
+    //     'password'  =>'password',
+    // ]);
 
     //delete users by the id
     //$user = DB::table('users')->where('id', 2)->delete();
 
-    //update users by the id
-    //$user = DB::table('users')->where('id', 1)->update(['email' =>  'dantas2@gmail.com']);
+    // update users by the id
+    // $user = DB::table('users')->where('id', 6)->update(['name' =>  'cinco']);
 
     //$user = User::find(1);
     //$user->update([
-    //    'email' => 'dantas2@gmail.com',
+    //    'email' => 'dantas3@gmail.com',
     //]);
 
-    //$user = User::find(1);
-    //$user->delete();
+    // $user = User::find(11);
+    // $user->delete();
 
-    dd($user);
+    dd($users);
 });
 
 Route::get('/dashboard', function () {
@@ -72,6 +74,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/avatar', [AvatarController::class, 'update'])->name('profile.avatar');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
